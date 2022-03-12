@@ -18,3 +18,4 @@ const firebaseConfig = {
   const emailProvider = new firebase.auth.EmailAuthProvider();
 
   export { auth, googleProvider, db, emailProvider };
+  
