@@ -18,6 +18,8 @@ const HeaderContainer = styled.div`
   display: flex ;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  z-index: 100000;
   > h1{
       font-family: 'Ubuntu', sans-serif;
       color: white;
