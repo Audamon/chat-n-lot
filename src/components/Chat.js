@@ -79,7 +79,6 @@ export default Chat;
 
 const ChatContainer = styled.div`
   background-color: var(--chat-background);
-  flex: 0.8;
   overflow-y: scroll;
   flex-grow: 1;
   margin-top: 60px;
@@ -90,8 +89,8 @@ const ChatHeader = styled.div`
   background-color: var(--chat-color);
   border: 2px solid #74aead;
   height: 50px;
-  position: relative;
-  flex: 0.8;
+  position: fixed;
+  width: 100%;
 `;
 const ChatHeaderLeft = styled.div`
   display: flex;
@@ -128,7 +127,7 @@ const ChatHeaderRight = styled.div`
 `;
 
 const ChatMessages = styled.div`
-
+margin-top: 50px;
 `;
 
 const ChatBottom = styled.div`

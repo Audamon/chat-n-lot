@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 
-function SideBarOption({Icon, title, addChannelOption}) {
+function SideBarOption({Icon, title, addChannelOption, updateProfileOption, channelsOption}) {
+    const navigate = useNavigate();
     const addChannel = () => {
         const channelName = prompt("Enter the channel name");
         if(channelName){
@@ -11,9 +13,19 @@ function SideBarOption({Icon, title, addChannelOption}) {
             })
         }
     }
+    const logOut = () => {
+        auth.signOut();
+        navigate('/');
+    }
+    const updateProfile = () => {
+        navigate('/profile');
+    }
+    const goToChannels = () => {
+        navigate('/');
+    }
   return (
     <SideBarOptionContainer
-        onClick={ addChannel}
+        onClick={addChannelOption ? addChannel : updateProfileOption? updateProfile : channelsOption ? goToChannels : logOut}
     >
         {Icon && <Icon />}
         <h3>{title}</h3>

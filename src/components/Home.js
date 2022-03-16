@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import { db } from '../firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import Channel from './Channel';
+import SideBar from './SideBar';
 
 function Home() {
     const [ channels ] = useCollection(db.collection('rooms')); 
   return (
+    <>
+    <SideBar />
     <HomeContainer>
         {channels?.docs.map(doc => (
             <Channel key={doc.id} id={doc.id} title={doc.data().roomName} />
         ))}
 
     </HomeContainer>
+    </>
   )
 }
 

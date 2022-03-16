@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 function ChatInput({channelName, channelId, chatRef}) {
     const [input, setInput] = useState('');
+    const [user] = useAuthState(auth);
     const sendMessage = (e) => {
         e.preventDefault();
         if(!channelId){
@@ -15,9 +16,9 @@ function ChatInput({channelName, channelId, chatRef}) {
         db.collection('rooms').doc(channelId).collection('messages').add({
             message: input,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            user: 'João',
-            userImage: 'https://img.webnovel.com/bookcover/13520985605105905/300/300.jpg?updateTime=1567355284826',
-        })
+            user: user?.displayName || 'Annonymous',
+            userImage: user?.photoURL || 'https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max',
+        });
         chatRef?.current?.scrollIntoView({
             behavior: 'smooth',
         });

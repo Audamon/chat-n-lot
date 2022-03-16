@@ -3,17 +3,33 @@ import styled from 'styled-components'
 import { Avatar } from '@material-ui/core';
 import SideBarOption from './SideBarOption';
 import AddIcon from '@material-ui/icons/Add';
+import { ExitToApp} from '@material-ui/icons'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {auth } from '../firebase';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ChatIcon from '@material-ui/icons/Chat';
 
 function SideBar() {
+    const [user] = useAuthState(auth);
+    
   return (
     <SideBarContainer>
+      
         <UserContainer>
-            <StyledAvatar />
-            <h4>João</h4>
+            <StyledAvatar
+              src={user?.photoURL}
+              alt={user?.displayName}
+            />
+            <h4>{auth.currentUser?.displayName || user?.email }</h4>
         </UserContainer>
+        <hr/>
+        <SideBarOption updateProfileOption Icon={AccountCircleIcon} title='Update Profile'/>
+        <hr/>
+        <SideBarOption channelsOption Icon={ChatIcon} title='Channels'/>
         <hr/>
         <SideBarOption addChannelOption Icon={AddIcon} title='Add Channel'/>
         <hr/>
+        <SideBarOption Icon={ExitToApp} title='Log Out'/>
     </SideBarContainer>
   )
 }
